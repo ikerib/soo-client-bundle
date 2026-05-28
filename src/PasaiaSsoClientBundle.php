@@ -20,6 +20,15 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class PasaiaSsoClientBundle extends Bundle implements PrependExtensionInterface
 {
     /**
+     * Return the bundle root directory (one level above src/).
+     * Required when the bundle class lives in src/ but config/ is at the package root.
+     */
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
+
+    /**
      * Prepend drenso_oidc configuration so apps only need SSO_* env vars.
      *
      * Config is prepended (not overridden), so apps can still add extra drenso_oidc
