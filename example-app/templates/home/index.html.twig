@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ongi etorri — SSO Example App{% endblock %}
+
+{% block body %}
+<h1>Ongi etorri, {{ user.name ?? user.userIdentifier }}!</h1>
+
+<div class="user-box">
+    <h2>Zure datuak (ID tokenetik)</h2>
+    <table>
+        <tr><th>Erabiltzailea</th><td><code>{{ user.userIdentifier }}</code></td></tr>
+        <tr><th>Izena</th><td>{{ user.name ?? '—' }}</td></tr>
+        <tr><th>E-posta</th><td>{{ user.email ?? '—' }}</td></tr>
+        <tr><th>NANa</th><td>{{ user.dni ?? '—' }}</td></tr>
+        <tr><th>Auth metodoa</th><td><span class="badge">{{ user.authMethod }}</span></td></tr>
+        <tr>
+            <th>Rolak</th>
+            <td>
+                {% for role in user.roles %}
+                    <span class="role">{{ role }}</span>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<p style="margin-top:2rem; color:#666; font-size:0.9em;">
+    Rolak SSO zerbitzariak kalkulatu ditu (LDAP taldeak → Symfony rolak).
+    Aplikazio honek ez du LDAP erabiltzen.
+</p>
+{% endblock %}

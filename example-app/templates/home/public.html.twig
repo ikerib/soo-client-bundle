@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orri publikoa{% endblock %}
+
+{% block body %}
+<h1>Orri publikoa</h1>
+<p>Orri hau ikusgai dago autentifikaziorik gabe ere.</p>
+{% if is_granted('ROLE_USER') %}
+    <p>Saioa hasita zaude: <strong>{{ app.user.userIdentifier }}</strong></p>
+{% else %}
+    <p><a href="{{ path('pasaia_sso_client_login') }}">Sartu SSOrekin</a></p>
+{% endif %}
+{% endblock %}

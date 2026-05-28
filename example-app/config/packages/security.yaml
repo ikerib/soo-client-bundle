@@ -1,0 +1,40 @@
+security:
+    # ── User provider ─────────────────────────────────────────────────────────
+    # The bundle provides OidcUserProvider — it handles OIDC users from the SSO.
+    # No database needed: users are stateless, built from ID token claims.
+    providers:
+        pasaia_oidc:
+            id: Pasaia\SsoClientBundle\Security\OidcUserProvider
+
+    # ── Firewalls ─────────────────────────────────────────────────────────────
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            lazy: true
+            provider: pasaia_oidc
+
+            # drenso's OIDC authenticator.
+            # check_path: where the SSO redirects back after authentication.
+            # login_path: where unauthenticated users are sent to start login.
+            oidc:
+                check_path: /sso/callback
+                login_path: /sso/login
+                # Read the user identifier from the "sub" claim.
+                user_identifier_property: sub
+                # Fetch full user claims from the SSO UserInfo endpoint
+                # (includes "roles", "name", "email", "auth_method", "dni").
+                enable_retrieve_user_info: true
+                # Redirect to SSO end_session_endpoint on logout.
+                enable_end_session_listener: true
+
+            logout:
+                path: /sso/logout
+
+    # ── Access control ────────────────────────────────────────────────────────
+    access_control:
+        - { path: ^/public, roles: PUBLIC_ACCESS }
+        - { path: ^/sso,    roles: PUBLIC_ACCESS }
+        - { path: ^/,       roles: ROLE_USER }

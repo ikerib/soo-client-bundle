@@ -1,0 +1,10 @@
+# Route provided by pasaia/sso-client-bundle.
+# Import this in your app's config/routes.yaml:
+#
+#   pasaia_sso_client:
+#       resource: '@PasaiaSsoClientBundle/config/routes.yaml'
+#
+pasaia_sso_client_login:
+    path: /sso/login
+    controller: Pasaia\SsoClientBundle\Controller\SsoLoginController::login
+    methods: [GET]

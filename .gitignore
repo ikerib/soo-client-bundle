@@ -1,0 +1,8 @@
+/vendor/
+/composer.lock
+/.phpunit.result.cache
+/.phpunit.cache/
+/example-app/vendor/
+/example-app/composer.lock
+/example-app/var/
+/example-app/.env.local

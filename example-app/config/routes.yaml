@@ -1,0 +1,10 @@
+# App routes
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+# Bundle routes (login redirect to SSO)
+pasaia_sso_client:
+    resource: '@PasaiaSsoClientBundle/config/routes.yaml'

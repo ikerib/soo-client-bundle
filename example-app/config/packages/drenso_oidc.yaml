@@ -1,0 +1,8 @@
+# pasaia/sso-client-bundle automatically prepends the essential drenso_oidc
+# configuration (well_known_url, client_id, client_secret) from SSO_* env vars.
+#
+# Add extra drenso options here only if you need to override the defaults.
+# drenso_oidc:
+#     clients:
+#         default:
+#             well_known_cache_time: 7200

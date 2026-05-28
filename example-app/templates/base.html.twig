@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}SSO Example App{% endblock %}</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        nav { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+        .user-box { background: #f0f7ff; border: 1px solid #b3d4ff; padding: 1rem; border-radius: 6px; }
+        .role { display: inline-block; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 3px; padding: 2px 8px; margin: 2px; font-size: 0.85em; font-family: monospace; }
+        .badge { background: #fff3e0; border: 1px solid #ffcc80; border-radius: 3px; padding: 2px 8px; font-size: 0.85em; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ path('home') }}">Hasiera</a>
+        <a href="{{ path('public_page') }}">Orri publikoa</a>
+        {% if is_granted('ROLE_USER') %}
+            <span>{{ app.user.userIdentifier }}</span>
+            <a href="{{ path('app_logout') }}">Irten</a>
+        {% else %}
+            <a href="{{ path('pasaia_sso_client_login') }}">Sartu</a>
+        {% endif %}
+    </nav>
+    {% block body %}{% endblock %}
+</body>
+</html>

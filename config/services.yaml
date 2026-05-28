@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Pasaia\SsoClientBundle\Security\OidcUserProvider:
+        # Registered as OidcUserProviderInterface; drenso's OidcAuthenticator
+        # picks it up automatically via Symfony autowiring.
+
+    Pasaia\SsoClientBundle\Controller\SsoLoginController:
+        arguments:
+            $scopes: '%pasaia_sso_client.scopes%'
+        tags:
+            - { name: controller.service_arguments }

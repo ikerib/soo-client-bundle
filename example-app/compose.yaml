@@ -1,0 +1,17 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8080:80"
+        environment:
+            APP_ENV: dev
+            APP_SECRET: dev-secret-change-me
+            SSO_ISSUER_URL: "${SSO_ISSUER_URL:-https://sso.pasaia.eus}"
+            SSO_CLIENT_ID: "${SSO_CLIENT_ID:-example-app}"
+            SSO_CLIENT_SECRET: "${SSO_CLIENT_SECRET:-change-me}"
+            SSO_REDIRECT_URI: "${SSO_REDIRECT_URI:-http://localhost:8080/sso/callback}"
+        volumes:
+            - .:/var/www/html
+            - /var/www/html/vendor
